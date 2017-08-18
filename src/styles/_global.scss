@@ -1,0 +1,53 @@
+::selection {
+  background: $brand-primary;
+  color: #fff;
+  text-shadow: 0px 0px 0px;
+}
+
+::-moz-selection {
+  background: $brand-primary;
+  color: #fff;
+  text-shadow: 0px 0px 0px;
+}
+
+::-webkit-selection {
+  background: $brand-primary;
+  color: #fff;
+  text-shadow: 0px 0px 0px;
+}
+
+body {
+  background-color: #0D0D0D;
+}
+
+.my-dark {
+  background: #1E2021 !important;
+}
+
+.input-dark {
+  background-color: #1E2021 !important;
+  border-radius: .2em;
+  border-width: 1px;
+  border-color: rgba(28,28,28,0.72);
+  text-align: center;
+  color: #AAABAB;
+}
+
+.text {
+  color: #AAABAB;
+}
+
+/*::-webkit-input-placeholder {
+  color: #AAABAB;
+  text-align: center;
+}
+
+::-moz-placeholder {
+  color: #AAABAB;
+  text-align: center;
+}
+
+:-moz-placeholder {
+  color: #AAABAB;
+  text-align: center;
+}*/
