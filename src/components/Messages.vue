@@ -42,23 +42,28 @@ export default {
     // userLeft(data) {
     //   console.log(data);
     // }
+    newMessage() {
+      this.scrollToBottom();
+    }
   },
   methods: {
     ...mapActions([
       'getMessages'
     ]),
-    format: function format(date) {
+    format(date) {
       return moment(new Date(date)).format('h:mm:ss A');
     },
-    scrollToBottom: function scrollToBottom() {
+    scrollToBottom() {
       debounce((scrollTo) => {
-        scrollTo(document.getElementsByClassName('messageList')[0].lastChild, 10, {
-          container: '.messageList',
-          easing: 'ease-in'
-        });
+        if (document.getElementsByClassName('messageList').length > 0) {
+          scrollTo(document.getElementsByClassName('messageList')[0].lastChild, 10, {
+            container: '.messageList',
+            easing: 'ease-in'
+          });
+        }
       }, 100)(this.$scrollTo);
     },
-    addChatMessage: function addChatMessage() {
+    addChatMessage() {
       this.$socket.emit('newMessage', { id: this.lobbyId, message: this.chatMessage });
       this.chatMessage = '';
       this.scrollToBottom();
@@ -66,7 +71,6 @@ export default {
   },
   updated() {
     this.scrollToBottom();
-    // this.getMessages(this.lobbyId);
   }
 };
 </script>
