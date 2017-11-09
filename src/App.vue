@@ -1,18 +1,24 @@
 <template>
   <div id="app">
-    <b-navbar toggleable type="inverse" variant="inverse">
-      <b-nav-toggle target="nav_collapse"></b-nav-toggle>
-      <router-link to="/" tag="a" class="navbar-brand"><span>Dota League</span></router-link>
+    <b-navbar toggleable="md" type="dark" variant="dark">
+      <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
+      <b-navbar-brand to="/">Dota League</b-navbar-brand>
       <!--<b-link class="navbar-brand" to="#">
         <span>Dota League</span>
       </b-link>-->
       <b-collapse is-nav id="nav_collapse">
-        <b-nav is-nav-bar>
-          <router-link to="/home" tag="li" active-class="active"><a class="nav-link">Home</a></router-link>
-          <router-link to="/leaderboards" tag="li" active-class="active"><a class="nav-link">Leaderboards</a></router-link>
-          <router-link to="/profile" tag="li" active-class="active"><a class="nav-link">Profile</a></router-link>
-        </b-nav>
-        <b-nav is-nav-bar class="ml-auto" v-if="user.displayName">
+        <b-navbar-nav>
+          <b-nav-item to="/home" active-class="active">
+            Home
+          </b-nav-item>
+          <b-nav-item to="/leaderboards" active-class="active">
+            Leaderboards
+          </b-nav-item>
+          <b-nav-item to="/profile" active-class="active">
+            Profile
+          </b-nav-item>
+        </b-navbar-nav>
+        <b-navbar-nav class="ml-auto" v-if="user.displayName">
           <b-nav-item-dropdown right>
             <!-- Using text slot -->
             <template slot="text">
@@ -21,12 +27,12 @@
             <b-dropdown-item to="#">Profile</b-dropdown-item>
             <b-dropdown-item v-on:click="logout()">Signout</b-dropdown-item>
           </b-nav-item-dropdown>
-        </b-nav>
-        <b-nav is-nav-bar class="ml-auto" v-if="!user.displayName">
+        </b-navbar-nav>
+        <b-navbar-nav class="ml-auto" v-if="!user.displayName">
           <b-nav-item :href="url">
             Login
           </b-nav-item>
-        </b-nav>
+        </b-navbar-nav>
       </b-collapse>
     </b-navbar>
     <main>
@@ -83,7 +89,6 @@ body {
 }
 
 main {
-  text-align: center;
   margin-top: 40px;
 }
 
@@ -104,5 +109,9 @@ header span {
   font-weight: 400;
   box-sizing: border-box;
   padding-top: 16px;
+}
+
+nav {
+  color: #fff
 }
 </style>
