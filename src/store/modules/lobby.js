@@ -51,15 +51,16 @@ export default {
     },
 
     socket_userJoined({ commit }, { displayName, userId, avatar }) {
-      commit('addMember', {
-        displayName,
-        userId,
-        avatar
-      });
+      setTimeout(() => {
+        commit('addMember', {
+          displayName,
+          userId,
+          avatar
+        });
+      }, 500);
     },
 
     socket_userLeft({ commit }, { userId }) {
-      console.log('test');
       commit('removeMember', {
         userId
       });
@@ -90,7 +91,6 @@ export default {
     },
 
     getLobby({ commit }, { lobbyId }) {
-      console.log(lobbyId);
       fetch(`/lobby/${lobbyId}`, {
         credentials: 'include'
       }).then((response) => {

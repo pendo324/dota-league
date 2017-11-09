@@ -17,7 +17,7 @@ Vue.use(VueScrollTo);
 /* eslint-disable import/first */
 import store from './store';
 
-Vue.use(VueSocketio, 'http://73.46.189.15:8000', store);
+Vue.use(VueSocketio, 'http://localhost:9090', store);
 
 /* eslint-disable no-new */
 new Vue({

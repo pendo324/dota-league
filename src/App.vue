@@ -71,7 +71,6 @@ export default {
   },
   mounted() {
     this.getUser();
-    console.log(this.url);
   }
 };
 </script>

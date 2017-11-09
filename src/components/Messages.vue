@@ -1,7 +1,7 @@
 <template>
   <div class="col-8" style="padding-left:0px;padding-right:0px;">
     <ul class="list-group messageList">
-      <li class="list-group-item" v-for="chatMessage in chatMessages" style="height:0px;">
+      <li class="list-group-item" v-for="chatMessage in chatMessages" :key="chatMessage.sent + chatMessage.userId">
         <span class="timestamp">[{{format(chatMessage.sent)}}]</span><span class="sender">{{chatMessage.displayName}}:</span><span class="content">{{chatMessage.content}}</span></li>
     </ul>
     <form v-on:submit.prevent="addChatMessage">
@@ -25,7 +25,7 @@ export default {
       content: 'Dapibus ac facilisis in'
     }, {
       content: 'Vestibulum at eros'
-    }]*/
+    }] */
   }),
   computed: {
     ...mapGetters([
@@ -35,22 +35,22 @@ export default {
     ])
   },
   sockets: {
-    userJoined(data) {
-      console.log(data);
-    },
+    // userJoined(data) {
+    //   console.log(data);
+    // },
 
-    userLeft(data) {
-      console.log(data);
-    }
+    // userLeft(data) {
+    //   console.log(data);
+    // }
   },
   methods: {
     ...mapActions([
       'getMessages'
     ]),
-    format: function (date) {
+    format: function format(date) {
       return moment(new Date(date)).format('h:mm:ss A');
     },
-    scrollToBottom: function () {
+    scrollToBottom: function scrollToBottom() {
       debounce((scrollTo) => {
         scrollTo(document.getElementsByClassName('messageList')[0].lastChild, 10, {
           container: '.messageList',
@@ -58,14 +58,13 @@ export default {
         });
       }, 100)(this.$scrollTo);
     },
-    addChatMessage: function () {
+    addChatMessage: function addChatMessage() {
       this.$socket.emit('newMessage', { id: this.lobbyId, message: this.chatMessage });
       this.chatMessage = '';
       this.scrollToBottom();
     }
   },
   updated() {
-    console.log(this.lobbyId);
     this.scrollToBottom();
     // this.getMessages(this.lobbyId);
   }

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
 import Messages from './Messages';
 import Members from './Members';
 import store from '../store';
@@ -31,9 +31,6 @@ export default {
     ...mapMutations([
       // 'joinLobby',
       'clearLobby'
-    ]),
-    ...mapActions([
-      'joinLobby'
     ])
   },
   data: () => ({
@@ -48,8 +45,7 @@ export default {
   }),
   mounted() {
     this.$socket.emit('joinLobby', { lobbyId: this.$route.params.id, userId: this.user.id });
-    window.beforeunload = () => {
-      console.log(this.lobbyId);
+    window.onbeforeunload = () => {
       this.$socket.emit('leaveLobby', { lobbyId: this.lobbyId, userId: this.user.id });
       this.clearLobby();
     };
@@ -65,7 +61,6 @@ export default {
     next();
   },
   beforeRouteLeave(to, from, next) {
-    console.log(this.lobbyId);
     this.$socket.emit('leaveLobby', { lobbyId: this.lobbyId, userId: this.user.id });
     this.clearLobby();
     next();

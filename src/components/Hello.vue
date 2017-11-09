@@ -43,7 +43,7 @@ export default {
   name: 'hello',
   data() {
     return {
-      msg: 'Welcome to this shitty website!'
+      msg: 'Welcome to this website!'
     };
   }
 };

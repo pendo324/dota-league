@@ -43,9 +43,8 @@ export default {
       'getLobbies'
     ])
   },
-  mounted: function () {
+  mounted() {
     this.getLobbies();
-    console.log(this.$route);
   }
 };
 </script>
