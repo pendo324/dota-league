@@ -1,7 +1,7 @@
 <template>
   <b-card title="Queue">
     <div class="card-text">
-      <b-button variant="outline-secondary" class="queue-button" @click="queuing=!queuing">
+      <b-button variant="outline-secondary" class="queue-button" @click="queue">
         <template v-if="!queuing">
           Join Queue
         </template>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import StatLine from './PlayerInfo/StatLine';
 
 export default {
@@ -35,11 +36,19 @@ export default {
   },
   data() {
     return {
-      queuing: false,
       modal: false
     };
   },
+  computed: {
+    ...mapGetters([
+      'queuing',
+      'matchReady'
+    ])
+  },
   methods: {
+    ...mapActions([
+      'joinQueue'
+    ]),
     toggleModal() {
       if (this.modal) {
         this.$root.$emit('bv::show::modal', 'queue-accept-modal');
@@ -55,7 +64,17 @@ export default {
     hideModal() {
       this.modal = !this.modal;
       this.$root.$emit('bv::hide::modal', 'queue-accept-modal');
+    },
+    queue() {
+      this.joinQueue({ socketId: this.$socket.id });
     }
+  },
+  mounted() {
+    const unwatch = this.$store.watch(() => this.$store.getters.acceptQueueId, () => {
+      console.log(this.acceptQueueId);
+      this.$root.$emit('bv::show::modal', 'queue-accept-modal');
+    });
+    unwatch();
   }
 };
 </script>

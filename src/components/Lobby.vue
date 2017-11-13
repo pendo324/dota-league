@@ -1,6 +1,6 @@
 <template>
-  <div class="col-9" style="padding-left: 0px;">
-    <div class="row">
+  <div class="col-9">
+    <div class="row lobby">
       <Messages></Messages>
       <Members></Members>
     </div>
@@ -44,7 +44,6 @@ export default {
     }]
   }),
   mounted() {
-    this.$socket.emit('joinLobby', { lobbyId: this.$route.params.id, userId: this.user.id });
     window.onbeforeunload = () => {
       this.$socket.emit('leaveLobby', { lobbyId: this.lobbyId, userId: this.user.id });
       this.clearLobby();
@@ -56,10 +55,6 @@ export default {
     // this.joinLobby({ lobbyId: this.$route.params.id });
     // console.log(this.$route.params.id);
   },
-  beforeRouteUpdate(to, from, next) {
-    this.$socket.emit('joinLobby', { lobbyId: this.lobby, userId: this.user.id });
-    next();
-  },
   beforeRouteLeave(to, from, next) {
     this.$socket.emit('leaveLobby', { lobbyId: this.lobbyId, userId: this.user.id });
     this.clearLobby();
@@ -68,6 +63,8 @@ export default {
 };
 </script>
 
-<style>
-
+<style lang="scss">
+.lobby {
+  padding-top: 2rem;
+}
 </style>

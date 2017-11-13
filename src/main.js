@@ -1,6 +1,7 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 
+import io from 'socket.io-client';
 import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
 import VueSocketio from 'vue-socket.io';
@@ -17,7 +18,11 @@ Vue.use(VueScrollTo);
 /* eslint-disable import/first */
 import store from './store';
 
-Vue.use(VueSocketio, 'http://localhost:9090', store);
+const socketInstance = io('http://127.0.0.1:9090', {
+  transports: ['polling']
+});
+
+Vue.use(VueSocketio, socketInstance, store);
 
 /* eslint-disable no-new */
 new Vue({

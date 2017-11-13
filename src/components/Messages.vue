@@ -1,5 +1,5 @@
 <template>
-  <div class="col-8" style="padding-left:0px;padding-right:0px;">
+  <div class="col-8 messages">
     <ul class="list-group messageList">
       <li class="list-group-item" v-for="chatMessage in chatMessages" :key="chatMessage.sent + chatMessage.userId">
         <span class="timestamp">[{{format(chatMessage.sent)}}]</span><span class="sender">{{chatMessage.displayName}}:</span><span class="content">{{chatMessage.content}}</span></li>
@@ -85,5 +85,28 @@ export default {
   display: inline-block;
   margin-right: .5em;
   font-weight: bold;
+}
+
+.messages { 
+  padding-right:0px;
+}
+
+.messageList {
+  background-color: #343a40;
+}
+
+.messages > * > input {
+  background-color: #343a40;
+  border-color: #343a40;
+  color: #b0b3be;
+}
+
+.messages > * > input:focus {
+  background-color: #343a40;
+  color: #b0b3be;
+}
+
+.messageList > li {
+  background-color: #343a40;
 }
 </style>

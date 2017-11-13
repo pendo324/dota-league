@@ -1,6 +1,6 @@
 <template>
-  <div class="col-4" style="padding-left:0px;">
-    <ul class="list-group">
+  <div class="col-4 members">
+    <ul class="list-group memberList">
       <li class="list-group-item" v-for="member in lobbyMembers"><img :src="member.avatar">{{member.displayName}}</li>
     </ul>
   </div>
@@ -19,6 +19,12 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+.members {
+  padding-left:0px;
+}
 
+.memberList > li {
+  background-color: #343a40;
+}
 </style>

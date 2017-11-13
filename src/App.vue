@@ -88,7 +88,7 @@ body {
 }
 
 main {
-  margin-top: 40px;
+  margin-top: 2rem;
 }
 
 header {

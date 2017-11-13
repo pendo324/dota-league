@@ -1,13 +1,20 @@
 <template>
-  <b-col :cols="expanded ? 12 : 10">
+  <b-col cols="12">
     <b-row>
-      <b-col :cols="expanded ? 6 : 7">
-        <PlayerInfo></PlayerInfo>
+      <b-col :cols="expanded ? 12 : 10">
+        <b-row>
+          <b-col :cols="expanded ? 6 : 7">
+            <PlayerInfo></PlayerInfo>
+          </b-col>
+          <router-view></router-view>
+          <b-col v-if="!expanded" :cols="expanded ? 4 : 5">
+            <Queue></Queue>
+          </b-col>
+        </b-row>
       </b-col>
-      <router-view></router-view>
-      <b-col v-if="!expanded" :cols="expanded ? 4 : 5">
-        <Queue></Queue>
-      </b-col>
+    </b-row>
+    <b-row>
+      <router-view name="bottom"></router-view>
     </b-row>
   </b-col>
 </template>

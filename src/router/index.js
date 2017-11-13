@@ -36,8 +36,11 @@ export default new Router({
       component: Queuing,
       children: [{
         name: 'match',
-        path: 'match',
-        component: Match
+        path: 'match/:id',
+        components: {
+          default: Match,
+          bottom: Lobby
+        }
       }]
     }]
   }, {
